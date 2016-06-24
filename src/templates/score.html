@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="css/score.css">
+{% end %}
+
+{% block body %}
+<br />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-body" id="paletteSetMenu">
+          <p>Choose a palette to score, or enter your own.</p>
+          <hr />
+
+          <button class="btn btn-primary" type="button" id="showComparisonPalettesBtn">Display Colorgorical comparison palettes</button>
+          <hr />
+
+          {% for paletteName, palettes in iter(sorted(paletteSets.items())) %}
+            {% block palette %}
+              <p class="paletteHeader">{{ paletteName }}</p>
+              <div class="well well-sm paletteCollectionList">
+                {% for pName, p in iter(sorted(palettes.items())) %}
+                  <div class="paletteCollectionListItem" data-palette="{{ [str(c) for c in p ] }}">
+                    <p style="display: inline-block;">{{ pName }}</p>
+                    <div class="paletteSwatches" style="display: inline-block;">
+                      {% for color in p %}
+                        <span style="background: {{ color}}"></span>
+                      {% end %}
+                    </div>
+                  </div>
+                {% end %}
+              </div>
+              <hr/>
+            {% end %}
+          {% end %}
+
+          <p>Please separate colors with a semi-colon</p>
+          <div class="input-group">
+            <input type="text" class="form-control" id="userDefinedScorePalette" placeholder="#f00, #ff0000, rgb(255, 0, 0)">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" id="userDefinedScoreBtn"><i class="fa fa-plus"></i></button>
+            </span>
+          </div><!-- /input-group -->
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="table-responsive" id="paletteScoreSummaryResultsContainer">
+          <table class="table table-condensed" id="paletteScoreSummaryResults">
+            <thead>
+              <tr class="paletteScoreSummary-header">
+                <td>Score</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="paletteScoreSummary-de">
+                <td>CIEDE2000</td>
+              </tr>
+              <tr class="paletteScoreSummary-nd">
+                <td>Name Difference</td>
+              </tr>
+              <tr class="paletteScoreSummary-pp">
+                <td>Pair Preference</td>
+              </tr>
+              <tr class="paletteScoreSummary-nu">
+                <td>Name Uniqueness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div id="paletteScoreResults"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% end %}
+
+{% block js %}
+<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/score.js"></script>
+{% end %}

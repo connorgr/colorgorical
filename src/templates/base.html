@@ -1,0 +1,40 @@
+{% from datetime import date %}
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Colorgorical</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    {% block css %}
+    {% end %}
+  </head>
+  <body>
+    <nav class="navbar-fixed-top">
+      <div id="titleBlock">
+        <div class="background"></div>
+        <!-- <h1 class="colorgoricalTitle noSelect">Colorgorical</h1> -->
+        <div class="navbarContainer">
+          <ul class="list-unstyled">
+            <li><a href="index.html">Create</a></li>
+            <li style="border-right: 1px solid #ccc;padding-right:15px"><a href="score.html">Score</a></li>
+            <li>Source</li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="bodyContainer">
+    {% block body %}
+    {% end %}
+    </div>
+    <script src="lib/d3/d3.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    {% block js %}
+    {% end %}
+  </body>
+</html>

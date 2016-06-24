@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="css/index.css">
+{% end %}
+
+{% block body %}
+
+<div class="indexContainer">
+<div class="queryMenu">
+  <div class="queryMenuGenerate">
+    <button class="btn btn-primary" id="generate">Generate</button>
+    <br />
+    <div id="querySpinnerArea">
+      {% include "snippet/spinner.html %}
+    </div>
+  </div>
+
+  <div class="queryMenuItems">
+    <section class="queryNumColors">
+      <h1 class="noSelect">Number of colors</h1>
+      <div>
+        <input id="paletteSize" type="number" class="form-control" placeholder="#" value="1" min="1" max="20" autofocus />
+      </div>
+    </section>
+
+    <section>
+      <h1 class="noSelect">Score importance</h1>
+      <div>
+        <ul id="sliderSettings" class="list-unstyled">
+          <li>
+            <h2>Perceptual distance: <span id="deRI"></span>%</h2>
+            <input id="modelWpd" type="range" min=0 max=100 value=0 />
+          </li>
+          <li>
+            <h2>Name distance: <span id="ndRI"></span>%</h2>
+            <input id="modelWnd" type="range" min=0 max=100 value=0 />
+          </li>
+          <li>
+            <h2>Name uniqueness: <span id="nuRI"></span>%</h2>
+            <input id="modelWnu" type="range" min=0 max=100 value=0 />
+          </li>
+          <li>
+            <h2>Pair preference: <span id="ppRI"></span>%</h2>
+            <input id="modelWpp" type="range" min=0 max=100 value=100 />
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h1 class="noSelect">Select hue filters</h1>
+      <div>
+        <div id="hueFilterSelection">
+        </div>
+        <p class="noMargin">Drag wheel, or add angle:</p>
+        <div>
+          <input type="number" class="hueFitlerRangeInput" placeholder="#" id="hueFilterRangeLow">
+           to
+          <input type="number" class="hueFitlerRangeInput" placeholder="#" id="hueFilterRangeHigh">
+          <a class="btn btn-primary btn-sm" id="hueFilterAddBtn"><i class="fa fa-plus"></i></a>
+        </div>
+        <ul id="hueFilterAddedPanel" class="noSelect queryMenuStripedList">
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h1 class="noSelect">Select lightness range</h1>
+      <div>
+        <svg id="lightnessFilterBar"></svg>
+        <div>
+          <input type="number" class="lightnessFilterInput" placeholder="#" id="lightnessFilterRangeLow">
+           to
+          <input type="number" class="lightnessFilterInput" placeholder="#" id="lightnessFilterRangeHigh">
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h1 class="noSelect">Add starting colors</h1>
+      <div>
+        <input id="startColorInput" type="text" style="width:146px" placeholder="#F00, rgb(0,0,0)">
+        <a class="btn btn-primary btn-sm" id="addStartColor"><i class="fa fa-plus"></i></a>
+        <ul id="startColorAddedPanel" class="queryMenuStripedList">
+        </ul>
+        <p style="margin: 0; color: #888">Results may improve with hue filters or slider changes.</p>
+      </div>
+    </section>
+
+  </div><!--end queryMenuItems -->
+</div>
+
+<div class="main">
+  <div id="resultsOptionsPanel">
+    <h1>Results:</h1>
+    <div class="resultsOptionsGroup">
+      <span class="title">Color space</span>
+      <div class="btn-group" id="resultsColorSpaceOpt">
+        <button type="button" class="btn btn-default btn-xs">Hex</button>
+        <button type="button" class="btn btn-default btn-xs">RGB</button>
+        <button type="button" class="btn btn-default btn-xs">Lab</button>
+        <button type="button" class="btn btn-default btn-xs">LCH</button>
+      </div>
+    </div>
+
+    <div class="resultsOptionsGroup">
+      <span class="title">Array format</span>
+      <div class="btn-group" id="resultsQuoteOpt">
+        <button type="button" class="btn btn-default btn-xs">"</button>
+        <button type="button" class="btn btn-default btn-xs">'</button>
+        <button type="button" class="btn btn-default btn-xs">No quote</button>
+      </div>
+    </div>
+
+    <div class="resultsOptionsGroup">
+      <span class="title">Charts</span>
+      <div class="btn-group" id="resultsChartOpt" data-toggle="buttons">
+        <label class="btn btn-default btn-xs active">
+          <input type="checkbox" autocomplete="off" value="map" checked><i class="fa fa-globe"></i>
+        </label>
+        <label class="btn btn-default btn-xs active">
+          <input type="checkbox" autocomplete="off" value="bar" checked><i class="fa fa-bar-chart"></i>
+        </label>
+        <label class="btn btn-default btn-xs active">
+          <input type="checkbox" autocomplete="off" value="scatter" checked><i class="icon-scatterplot"></i>
+        </label>
+        <label class="btn btn-default btn-xs">
+          <input type="checkbox" autocomplete="off" value="colorInfo"><i class="fa fa-eyedropper"></i><i class="fa fa-info-circle"></i>
+        </label>
+      </div>
+    </div>
+
+    <button id="clearResultsBtn" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Clear all</button>
+  </div><!-- end results bar -->
+
+  <div id="resultsPanel" class="fluid-container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        {% include "snippet/instructions.html" %}
+      </div>
+      <div class="col-sm-12 col-md-6">
+        {% include "snippet/about.html" %}
+      </div>
+    </div>
+  </div>
+
+</div><!-- end main flexbox -->
+</div><!-- end flexbox container -->
+
+{% end %}
+
+{% block js %}
+<script src="lib/topojson/topojson.js"></script>
+<!-- <script src="lib/bootstrap/js/affix.js"></script> -->
+<!-- <script src="lib/bootstrap/js/button.js"></script> -->
+
+<script>
+var ghostMapData = {
+  topo: "{{ topoData  }}",
+  unemployment: "{{ valueData }}"
+};
+
+var rateById = d3.map(),
+    rateByRandom = d3.map();
+
+ghostMapData.topo = JSON.parse(ghostMapData.topo.replace(/&quot;/g, '"'));
+ghostMapData.unemployment = JSON.parse(ghostMapData.unemployment.replace(/&quot;/g, '"'));
+
+ghostMapData.unemployment.forEach(function(d) {
+  rateById.set(d.id, +d.rate);
+  // Adjust random numbers by .15 to fit within unemployment range
+  rateByRandom.set(d.id, Math.random()*.15);
+});
+</script>
+
+<script src="js/spinner.js"></script>
+
+<script src="js/requests.js"></script>
+<script src="js/makePalette.js"></script>
+<script src="js/index.js"></script>
+
+<script src="js/hueFilter.js"></script>
+<script src="js/lightnessFilter.js"></script>
+<script src="js/startColor.js"></script>
+
+<script src="js/resultBar.js"></script>
+
+<script src="js/palettePreviewViz.js"></script>
+
+
+<!-- <script src="js/draw.js"></script> -->
+{% end %}

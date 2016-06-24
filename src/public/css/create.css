@@ -1,0 +1,305 @@
+#queryMenu {
+  background: #444;
+  color: #ddd;
+  padding: 15px;
+  height: 100%;
+  overflow-y: scroll;
+  width: 250px;
+}
+
+#queryMenu input {
+  width: 75px;
+}
+
+#queryMenu .panel {
+  background: #555555;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+  margin: 15px 0 15px 0;
+}
+
+#queryMenu .panel h1 {
+  background: #333;
+  color: #ccc;
+  font-size: 16px;
+  font-weight: normal;
+  height: 22px;
+  line-height: 16px;
+  margin: -1px 2px 0 -1px;
+  padding: 3px 5px;
+  width: 220px;
+}
+#queryMenu .panel .content {
+  margin: 0 15px;
+  padding-bottom: 15px;
+}
+#queryMenu .panel .content ul {
+  background: #444;
+  box-shadow: inset 0px 0px 5px rgba(0,0,0,0.25);
+  margin: 5px 0;
+  max-height: 75px;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+#queryMenu .panel .content ul  li:first-child {
+  border-top: 1px solid #666;
+}
+
+#queryMenu .panel .content ul li {
+  border-bottom: 1px solid #666;
+}
+
+#queryMenu .panel .content ul li i.fa-trash-o:hover {
+  color: red;
+  cursor: pointer;
+}
+
+#queryMenu .panel .content #modelParameters {
+  background: none;
+  box-shadow: none;
+  margin: 0;
+  max-height: none;
+  padding: 0;
+}
+#queryMenu .panel .content #modelParameters li {
+  margin-left: 0;
+  padding-bottom: 5px;
+}
+#queryMenu .panel .content #modelParameters li label {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+#queryMenu .panel .content #suggestMetricSliderSettings {
+  margin-top: 5px;
+}
+
+#queryMenu .panel h1 {
+  cursor: pointer;
+}
+#queryMenu .panel .content {
+  display: none;
+}
+#queryMenu .seperator-text {
+  line-height: 0.5;
+  margin-top: 40px;
+  text-align: center;
+}
+#queryMenu .seperator-text span {
+  display: inline-block;
+  position: relative;
+}
+#queryMenu .seperator-text span::before,
+#queryMenu .seperator-text span::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid #333;
+  border-top: 1px solid #333;
+  top: 0;
+  width: 35px;
+}
+#queryMenu .seperator-text span::before {
+  right: 100%;
+  margin-right: 15px;
+}
+#queryMenu .seperator-text span::after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+#generate {
+  margin: 15px;
+}
+
+#spinnerArea {
+  margin: 0 auto;
+  text-align: center;
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+#spinnerArea .spinner {
+  color: #ccc;
+  font-size: 30px;
+  text-align: center;
+  -webkit-animation: spin 20s infinite linear;
+  -moz-animation: spin 20s infinite linear;
+  -o-animation: spin 20s infinite linear;
+  animation: spin 20s infinite linear;
+}
+
+#mainContainer {
+  margin-left: 280px;
+  margin-right: 30px;
+  padding-top: 15px;
+}
+
+#resultsOptionsPanel {
+  background: #ccc;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.25);
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+#resultsOptionsPanel:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+#resultsOptionsPanel #clearResultsBtn {
+  display: inline-block;
+  float: right;
+}
+#resultsOptionsPanel .resultsOptionsGroup {
+  background: #bbb;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  display:inline-block;
+  margin: 0 15px 5px 0;
+  padding-left: 10px;
+}
+#resultsOptionsPanel .resultsOptionsGroup .title {
+  margin-right: 5px;
+}
+#resultsOptionsPanel h1 {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 14px;
+  margin: 0 0 5px 0;
+}
+@media screen and (max-width: 1050px) {
+  #resultsOptionsPanel h1 {
+    display: none;
+  }
+}
+.icon-scatterplot {
+  background-image: url('../img/icon-scatterplot.svg');
+  background-position: 0px 1px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 12px;
+  width: 15px;
+}
+
+.paletteResult {
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 2px;
+  margin: 0 0 15px 0;
+  padding: 10px 10px 10px 0;
+  position: relative;
+  width: 100%;
+}
+.paletteResult:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+.paletteResult .swatches {
+  display: inline-block;
+  vertical-align: top;
+}
+.paletteResult .exampleCharts {
+  display: inline-block;
+}
+.paletteResult .exampleCharts div {
+  display: inline-block;
+}
+
+.paletteResult input {
+  cursor: text !important;
+}
+
+.paletteResult ul {
+  background: #eee;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.15);
+  margin: 10px 0;
+  height: 130px;
+  overflow-y: scroll;
+  padding: 5px;
+}
+.paletteResult .swatchList li {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0 0 5px;
+}
+.paletteResult .swatchList li:first-of-type {
+  border-top: 1px solid #ccc;
+}
+.paletteResult .swatchList li span.swatchColorName {
+  font-size: 12px;
+  position: relative;
+  bottom: 5px;
+  left: 5px;
+}
+.paletteResult .swatchList li span.addToStart {
+  float: right;
+  margin-left: 8px;
+  margin-top: 0px;
+}
+
+.closePaletteResult {
+  border-top-right-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.05);
+  color: rgba(0,0,0,0.4);
+  height: 25px;
+  padding: 5px 5px 5px 5px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.closePaletteResult:hover{
+  background: rgba(255,0,0,0.25);
+  color: rgba(255,0,0,0.75);
+  cursor: pointer;
+}
+
+.minMaxPaletteResult {
+  border-top-right-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.05);
+  color: rgba(0,0,0,0.4);
+  height: 25px;
+  padding: 5px 5px 5px 5px;
+  position: absolute;
+  right: 0px;
+  top: 25px;
+}
+.maxPaletteResult:hover{
+  background: rgba(16, 182, 81,0.25);
+  color: rgba(16, 182, 81,1);
+  cursor: pointer;
+}
+.closePaletteResultResult:hover{
+  background: rgba(240,173,78,0.25);
+  color: rgba(240,173,78,1);
+  cursor: pointer;
+}
+
+.scatterplotContainer {
+  min-height: 200px;
+}
+
+#createInfo {
+  border: 2px solid rgba(0, 127, 255, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+}
+#createInfo h1 {
+  border-bottom: 1px solid rgba(102,102,102,0.25);
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin: 0;
+  color: #666666;
+}
