@@ -28,6 +28,7 @@ if args.server:
 elif args.makeSamples:
     ms = MakeSamples()
     if ms.savedResultsExist() == False:
+        print 'Making palettes'
         ms.make()
     else:
         ms.loadPalettes()
@@ -35,5 +36,5 @@ elif args.makeSamples:
     # To use Helvetica, follow the instructions below. Makes the charts look
     # a _lot_ better.
     # http://blog.olgabotvinnik.com/blog/2012/11/15/2012-11-15-how-to-set-helvetica-as-the-default-sans-serif-font-in/
-    # ms.savePlots()
+    ms.savePlots()
     ms.writeTex()

@@ -1,5 +1,37 @@
 #include "numpyColorgorical.h"
 
+void double_colorIndex_ufunc(char **args, npy_intp *dimensions, npy_intp* steps,
+    void* data) {
+  npy_intp i;
+  npy_intp n = dimensions[0];
+
+  assert(dimensions[1] ==3);
+  int nrow = 3;
+
+  char *in = args[0], *out = args[1];
+  npy_intp in_step = steps[0];
+  npy_intp out_step = steps[1];
+
+  double l,a,b;
+
+  for(i = 0; i < n/nrow; i++) {
+    l = *(double *) in;
+    in+=in_step;
+    a = *(double *) in;
+    in+=in_step;
+    b = *(double *) in;
+    in+=in_step;
+
+    *((double *) out) = getColorIndex(l, a, b);
+    out +=out_step;
+    *((double *) out) = -1.0;
+    out +=out_step;
+    *((double *) out) = -1.0;
+    out +=out_step;
+  }
+}
+
+
 void double_score_ufunc(char **args, npy_intp *dimensions, npy_intp* steps,
     void* data) {
   npy_intp i;
@@ -91,9 +123,12 @@ void double_scorePenalty_ufunc(char **args, npy_intp *dimensions,
 
 ////////////////////////////////////////////////////////////////////////////////
 // INITIALIZE NUMPY UFUNC OBJECT CODE
+PyUFuncGenericFunction double_colorIndex_func[1] = {&double_colorIndex_ufunc};
+static char double_colorIndex_types[2] = {NPY_DOUBLE, NPY_DOUBLE}; // input + output
+static void *double_colorIndex_data[1] = {NULL};
 
 PyUFuncGenericFunction double_score_func[1] = {&double_score_ufunc};
-static char double_score_types[2] = {NPY_DOUBLE, NPY_DOUBLE}; // input + output
+static char double_score_types[2] = {NPY_DOUBLE, NPY_DOUBLE};
 static void *double_score_data[1] = {NULL};
 
 PyUFuncGenericFunction double_scorePenalty_func[1] =
@@ -107,13 +142,17 @@ static PyMethodDef ScoreMethods[] = {
 };
 
 PyMODINIT_FUNC initnumpyColorgorical(void) {
-  PyObject *dict, *module, *score, *scorePenalty;
+  PyObject *colorIndex, *dict, *module, *score, *scorePenalty;
 
   module = Py_InitModule("numpyColorgorical", ScoreMethods);
   if (module == NULL) return;
 
   import_array();
   import_umath();
+
+  colorIndex = PyUFunc_FromFuncAndData(double_colorIndex_func, double_colorIndex_data,
+                                  double_colorIndex_types, 1, 1, 1, PyUFunc_None,
+                                  "colorIndex", "colorIndex_docstring", 0);
 
   score = PyUFunc_FromFuncAndData(double_score_func, double_score_data,
                                   double_score_types, 1, 1, 1, PyUFunc_None,
@@ -126,6 +165,9 @@ PyMODINIT_FUNC initnumpyColorgorical(void) {
                                   "scorePenalty_docstring", 0);
 
   dict = PyModule_GetDict(module);
+
+  PyDict_SetItemString(dict, "colorIndex", colorIndex);
+  Py_DECREF(colorIndex);
 
   PyDict_SetItemString(dict, "score", score);
   Py_DECREF(score);

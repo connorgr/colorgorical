@@ -5,6 +5,7 @@ import numpy as np
 import os
 from os import listdir
 from os.path import isfile, join
+import datetime
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -13,6 +14,8 @@ import matplotlib.tri as tri
 
 from model import model
 from model.util import convert
+
+import model.numpyColorgorical as npc
 
 class MakeSamples():
     def __init__(self):
@@ -59,17 +62,40 @@ class MakeSamples():
 
     def make(self):
         def makeSwatch(weights):
+            def rep(size):
+                print "Making:"+str(weights)+" "+str(size)+" "+str(datetime.datetime.now())
+                # Thanks to http://stackoverflow.com/a/16973510/239924
+                def getUniqueIdx(pals):
+                    palIdx = np.array([ sorted([npc.colorIndex(c).astype(int)[0] for c in p]) for p in pals ])
+
+                    b = np.ascontiguousarray(palIdx).view(np.dtype((np.void, palIdx.dtype.itemsize * palIdx.shape[1])))
+                    _, uniquePalIdx = np.unique(b, return_index=True)
+                    return uniquePalIdx
+
+                pals = np.array([
+                    self.colorgorical.makePreferablePalette(s, 10, weights=weights)
+                    for r in xrange(self.repeats)
+                ])
+
+                pals = pals[getUniqueIdx(pals)]
+
+                while pals.shape[0] < self.repeats:
+                    newPals = np.array([
+                        self.colorgorical.makePreferablePalette(s, 10, weights=weights)
+                        for r in xrange(self.repeats - pals.shape[0])
+                    ])
+                    pals = np.vstack((pals, newPals))
+                    pals = pals[getUniqueIdx(pals)]
+
+                pals = pals[:self.repeats]
+
+                return [[list(color) for color in p] for p in pals]
+
             weights = {
                 "ciede2000": weights[0], "nameDifference": weights[1],
                 "nameUniqueness": 0.0, "pairPreference": weights[2]
             }
-            palettes = [
-                [
-                    self.colorgorical.makePreferablePalette(s, 10, weights=weights).tolist()
-                    for r in xrange(self.repeats)
-                ]
-                for s in self.sizes
-            ]
+            palettes = [ rep(s) for s in self.sizes ]
             for p in palettes:
                 print p, '====='
             print '\n\n'

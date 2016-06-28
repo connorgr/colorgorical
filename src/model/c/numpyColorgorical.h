@@ -15,6 +15,12 @@
 // likely get segfaults from the ufunc trying to step into bad neighboring
 // memory blocks.
 
+// Retrieves the 1D indecies of Lab colors in an n x 3 numpy array. An example
+// use of this function would be to create bit masks based on what colors are
+// in a number of palettes.
+extern void double_colorIndex_ufunc(char **args, npy_intp *dimensions,
+    npy_intp* steps, void* data);
+
 // Computes CIEDE2000 (perceptual distance), name difference, and pair
 // preference scores for two CIE Lab colors, and the name uniqueness for each.
 // The function expects a 6 column array, such that the first three columns
