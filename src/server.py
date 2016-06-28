@@ -27,7 +27,7 @@ class ColorgoricalServer:
         self.model = model.Model()
 
         thisFilePath = os.path.dirname(__file__)
-        public_root = os.path.join(thisFilePath, 'public')
+        public_root = os.path.join(thisFilePath, 'public/static')
         template_root = os.path.join(thisFilePath, 'templates')
         data_root = os.path.join(public_root, 'data')
 
@@ -48,16 +48,18 @@ class ColorgoricalServer:
         handlerList = [
           (r'/', handlers.main.MainHandler, mainOps),
           (r'/(.*).html', handlers.template.TemplateHandler, mainOps),
-          (r'/makePalette', handlers.makePalette.MakePaletteHandler, makePaletteOps),
+          (r'/color/makePalette', handlers.makePalette.MakePaletteHandler, makePaletteOps),
         #   (r'/model', handler.ModelHandler, handlerOps),
-          (r'/scorePalette', handlers.scorePalette.ScorePaletteHandler, makePaletteOps),
-          (r'/data/(.*)',  web.StaticFileHandler, {'path': data_root}),
-          (r'/(.*)', web.StaticFileHandler, {'path': public_root})
+          (r'/color/scorePalette', handlers.scorePalette.ScorePaletteHandler, makePaletteOps),
+        #   (r'/data/(.*)',  web.StaticFileHandler, {'path': data_root}),
+          (r'/static/(.*)', web.StaticFileHandler, {'path': public_root})
         ]
 
         settings = dict(
           debug=True,
-          template_path=template_root
+          template_path=template_root,
+          static_path=public_root,
+          static_url_prefix="/static/"
         )
 
         self.application = web.Application(handlerList, **settings)

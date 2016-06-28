@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="{{ static_url("css/index.css") }}">
 {% end %}
 
 {% block body %}
@@ -151,7 +151,7 @@
 {% end %}
 
 {% block js %}
-<script src="lib/topojson/topojson.js"></script>
+<script src="{{ static_url("lib/topojson/topojson.js") }}"></script>
 <!-- <script src="lib/bootstrap/js/affix.js"></script> -->
 <!-- <script src="lib/bootstrap/js/button.js"></script> -->
 
@@ -174,19 +174,19 @@ ghostMapData.unemployment.forEach(function(d) {
 });
 </script>
 
-<script src="js/spinner.js"></script>
+<script src="{{ static_url("js/spinner.js") }}"></script>
 
-<script src="js/requests.js"></script>
-<script src="js/makePalette.js"></script>
-<script src="js/index.js"></script>
+<script src="{{ static_url("js/requests.js") }}"></script>
+<script src="{{ static_url("js/makePalette.js") }}"></script>
+<script src="{{ static_url("js/index.js") }}"></script>
 
-<script src="js/hueFilter.js"></script>
-<script src="js/lightnessFilter.js"></script>
-<script src="js/startColor.js"></script>
+<script src="{{ static_url("js/hueFilter.js") }}"></script>
+<script src="{{ static_url("js/lightnessFilter.js") }}"></script>
+<script src="{{ static_url("js/startColor.js") }}"></script>
 
-<script src="js/resultBar.js"></script>
+<script src="{{ static_url("js/resultBar.js") }}"></script>
 
-<script src="js/palettePreviewViz.js"></script>
+<script src="{{ static_url("js/palettePreviewViz.js") }}"></script>
 
 
 <!-- <script src="js/draw.js"></script> -->

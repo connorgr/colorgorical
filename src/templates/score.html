@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="css/score.css">
+<link rel="stylesheet" href="{{ static_url("css/score.css") }}">
 {% end %}
 
 {% block body %}
@@ -82,6 +82,6 @@
 {% end %}
 
 {% block js %}
-<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="js/score.js"></script>
+<script src="{{ static_url("lib/bootstrap/dist/js/bootstrap.min.js") }}"></script>
+<script src="{{ static_url("js/score.js") }}"></script>
 {% end %}
