@@ -70,6 +70,6 @@ class ColorgoricalServer:
             **kwargs: optional server configuration options (e.g., port number)
         """
         port = kwargs.pop('port', 8888)
-        self.application.listen(8888)
+        self.application.listen(port)
         print "Colorgorical server started on port", port
         tornado.ioloop.IOLoop.instance().start()
