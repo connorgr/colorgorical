@@ -1,0 +1,39 @@
+<div class="paletteResult row" data-palette="{{ ";".join(palette) }}">
+  {% if len(palette) == 0 %}
+    <div class="col-sm-12">
+      <p>Whoops! Colorgorical couldn't create a palette with those settings.</p>
+    </div>
+  {% else %}
+    <div class="swatches col-sm-12 col-md-4 col-lg-3">
+      <div>
+        {% for color in rgbPalette %}
+          <span class="swatch" style="height: 20px; width: 20px; display: inline-block; background:{{ color }}"></span>
+        {% end %}
+        {% if len(palette) < paletteSize %}
+          <p class="text-danger"><i class="fa fa-exclamation-triangle"></i> Ran out of colors to add. Try again, or with different settings.</p>
+        {% end %}
+      </div>
+
+      <input type="text" class="form-control" readonly value="{{ '[\"' + '\",\"'.join(palette) + '\"]' }}"  onClick="this.setSelectionRange(0, this.value.length)">
+      <div>
+        <ul class="swatchList list-unstyled">
+          {% for rgb, color in zip(rgbPalette, palette) %}
+            <li><span class="swatch" style="height: 20px; width: 20px; display: inline-block; background:{{ rgb }}"></span><span class="swatchColorName" data-color-name="{{ color }}">{{ color }}</span><span class="btn btn-xs btn-default addToStart"><i class="fa fa-plus"></i> start</span></li>
+          {% end %}
+        </ul>
+      </div>
+    </div>
+    <div class="exampleCharts col-sm-12 col-md-8 col-lg-9">
+      <div class="mapContainer"></div>
+      <div class="barContainer"></div>
+      <div class="scatterplotContainer"></div>
+      <div class="colorSpaces">
+        <div class="colorSpaces-lightness"></div>
+        <div class="colorSpaces-CH"></div>
+        <div class="colorSpaces-ab"></div>
+      </div>
+    </div>
+  {% end %}
+  <i class="fa fa-times closePaletteResult noSelect"></i>
+  <i class="fa fa-minus minMaxPaletteResult minPaletteResult noSelect"></i>
+</div>

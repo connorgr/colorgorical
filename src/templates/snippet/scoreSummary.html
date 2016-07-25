@@ -1,0 +1,76 @@
+<div class="scoreResult container-fluid" style="position: relative">
+  <i class="fa fa-times closePaletteScore noSelect"></i>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="container-fluid">
+      {% for size in [str(d) for d in sorted([int(p) for p in palettes.keys()])] %}
+        <div class="row">
+          <div class="col-sm-12">
+            <h4>{{size}}-Color Palettes</h4>
+          </div>
+        </div>
+        <div class="row">
+          {% for pScore in ["de", "nd", "pp", "nu"] %}
+            <div class="col-sm-3 well well-sm">
+              <h5>{{pScore.upper()}}-ordered (1 = best)</h5>
+              <ol>
+                {% for p in orderedAveragePaletteScores[size][pScore] %}
+                  <li>{{p["collection"]}} <span style="float: right">{{p["score"]}}</span></li>
+                {% end %}
+              </ol>
+              <hr />
+              <ol>
+                {% for p in orderedPaletteScores[size][pScore] %}
+                  <li>{{p["collection"][0]}} {{p["name"]}}  <span style="float: right">{{p["score"]}}</span></li>
+                {% end %}
+              </ol>
+            </div>
+          {% end %}
+        </div>
+      {% end %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 chartArea"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="container-fluid">
+      {% for size in [str(d) for d in sorted([int(p) for p in palettes.keys()])] %}
+        <div class="row">
+          <div class="col-sm-12">
+            <h4>{{size}}-Color Palettes</h4>
+          </div>
+        </div>
+        <div class="row">
+          {% for pType, ps in palettes[size].iteritems() %}
+            <div class="col-sm-4">
+              <h5>{{pType}}</h5>
+              {% for pn, pcs in ps.iteritems() %}
+                <div class="comparisonPaletteSummaryItem">
+                  <span>{{pn}}</span>
+                  <div class="paletteSwatches">
+                    {% for c in pcs %}
+                      <span style="background: {{c}}"></span>
+                    {% end %}
+                  </div>
+                  <ul class="list-unstyled list-inline">
+                    {% for scoreName in ["de", "nd", "pp", "nu"] %}
+                      <li>{{scoreName.upper()}}: {{round(paletteScores[size][pType][pn][scoreName]*1000)/1000}}</li>
+                    {% end %}
+                  </ul>
+                </div>
+              {% end %}
+            </div>
+          {% end %}
+        </div>
+        <hr />
+      {% end %}
+    </div>
+    </div>
+  </div>
+</div>

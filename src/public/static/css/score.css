@@ -1,0 +1,162 @@
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#paletteSetMenu {
+  background: #444444;
+  border-radius: 5px;
+}
+
+#paletteSetMenu p {
+  color: rgb(221, 221, 221);
+}
+
+#paletteSetMenu hr {
+  margin: 0 0 5px 0;
+}
+
+#paletteSetMenu .paletteHeader {
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+#paletteSetMenu .paletteCollectionList {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+#paletteSetMenu .paletteCollectionList .paletteCollectionListItem {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  padding: 10px 10px 0px 10px;
+}
+#paletteSetMenu .paletteCollectionList .paletteCollectionListItem:hover {
+  border: 1px solid #666;
+}
+
+#paletteSetMenu .paletteCollectionList .paletteCollectionListItem * {
+  color: rgb(51, 51, 51);
+}
+
+#showComparisonPalettesBtn {
+  margin-bottom: 5px;
+}
+
+.scoreResult {
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.paletteSwatches span {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+}
+
+#paletteScoreSummaryResultsContainer {
+  margin-right: 15px;
+}
+#paletteScoreSummaryResults {
+  font-size: 12px;
+}
+#paletteScoreSummaryResults thead tr td {
+  font-weight: bold;
+}
+#paletteScoreSummaryResults thead tr td,
+#paletteScoreSummaryResults tbody tr td {
+  border-right: 1px solid #ddd;
+}
+#paletteScoreSummaryResults thead tr td:last-child,
+#paletteScoreSummaryResults tbody tr td:last-child {
+  border-right: none;
+}
+
+#paletteScoreSummaryResults tbody .paletteScoreSummary-nu {
+  background: rgb(183, 209, 101);
+}
+#paletteScoreSummaryResults tbody .paletteScoreSummary-de {
+  background: rgb(187, 195, 254);
+}
+#paletteScoreSummaryResults tbody .paletteScoreSummary-nd {
+  background: rgb(65, 170, 202);
+}
+#paletteScoreSummaryResults tbody .paletteScoreSummary-pp {
+  background: rgb(27, 225, 159);
+}
+
+.scoreResultTable tbody tr td {
+  border: none;
+  font-size: 12px;
+  min-width: 15px;
+  padding: 5px;
+}
+
+.minPaletteScoreTable {
+  font-size: 12px;
+}
+
+.score-mtx-pane {
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #fff;
+}
+
+.closePaletteScore {
+  border-top-right-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.05);
+  color: rgba(0,0,0,0.4);
+  height: 25px;
+  padding: 5px 5px 5px 5px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.closePaletteScore:hover{
+  background: rgba(255,0,0,0.25);
+  color: rgba(255,0,0,0.75);
+  cursor: pointer;
+}
+
+.score-mtx-well {
+  overflow-x: scroll;
+}
+.deMtx, .ndMtx, .ppMtx {
+  background: white;
+  font-size: 10px;
+  text-align: center;
+}
+.deMtx .dangerousDE,
+.deMtx .terribleDE,
+.deMtx .badDE {
+  border-color:#000;
+}
+.deMtx .dangerousDE {
+  background: rgba(255,0,0,0.75);;
+}
+.deMtx .terribleDE {
+  background: rgba(255,0,0,0.5);
+}
+.deMtx .badDE {
+  background: rgba(255,0,0,0.25);
+}
+
+.comparisonPaletteSummaryItem {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+}

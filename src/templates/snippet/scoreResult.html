@@ -1,0 +1,162 @@
+<div class="scoreResult container-fluid" style="position: relative">
+  <i class="fa fa-times closePaletteScore noSelect"></i>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="table-responsive">
+        <table class="table scoreResultTable">
+          <tbody>
+            <tr>
+              <td>Original:</td>
+              {% for color in originalPalette %}
+                <td data-lab-color="{{color}}"></td>
+              {% end %}
+            </tr>
+            <tr>
+              <td>Converted:</td>
+              {% for color in convertedPalette %}
+                <td data-lab-color="{{color}}"></td>
+              {% end %}
+            </tr>
+          </tbody>
+        </table>
+      </div><!-- end palette table -->
+    </div><!-- end col-sm-3 -->
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <p><strong>Minimum Palette Scores</strong></p>
+      <div class="table-responsive">
+        <table class="table minPaletteScoreTable">
+          <tbody>
+            {% for name, score in zip(["CIEDE2000", "Name Difference", "Name Uniqueness", "Pair Preference"], iter(sorted(minScores.iteritems()))) %}
+            <tr>
+              <td>{{ name }}</td>
+              <td>{{ round(score[1], 3) }}</td>
+            </tr>
+            {% end %}
+          </tbody>
+        </table>
+      </div>
+    </div><!-- end col-sm-3 -->
+
+    <div class="col-sm-9">
+      <div><!-- tabbed mtx environment -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#deMtx-{{uniqId}}" aria-controls="deMtx-{{uniqId}}" role="tab" data-toggle="tab">CIEDE2000</a></li>
+          <li role="presentation"><a href="#ndMtx-{{uniqId}}" aria-controls="ndMtx-{{uniqId}}" role="tab" data-toggle="tab">Name Difference</a></li>
+          <li role="presentation"><a href="#ppMtx-{{uniqId}}" aria-controls="ppMtx-{{uniqId}}" role="tab" data-toggle="tab">Pair Preference</a></li>
+          <li role="presentation"><a href="#nuMtx-{{uniqId}}" aria-controls="nuMtx-{{uniqId}}" role="tab" data-toggle="tab">Name Uniqueness</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active score-mtx-pane" id="deMtx-{{uniqId}}">
+            <div class="well well-sm score-mtx-well score-deMtx-well" style="margin:10px">
+              <div class="table-responsive">
+                <table class="table table-bordered table-condensed deMtx">
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      {% for color in convertedPalette %}
+                        <td data-lab-color="{{color}}"></td>
+                      {% end %}
+                    </tr>
+                    {% for color, row in zip(convertedPalette, deMtx) %}
+                      <tr>
+                        <td data-lab-color="{{color}}"></td>
+                        {% for d in row %}
+                          {% if d < 5 %}
+                            <td class="dangerousDE">{{ d }}</td>
+                          {% elif d < 10 %}
+                            <td class="terribleDE">{{ d }}</td>
+                          {% elif d < 15 %}
+                            <td class="badDE">{{ d }}</td>
+                          {% else %}
+                            <td>{{ d }}</td>
+                          {% end %}
+                        {% end %}
+                      </tr>
+                    {% end %}
+                  <tbody>
+                </table>
+              </div><!-- end responsive table -->
+            </div>
+          </div><!-- end DE panel -->
+          <div role="tabpanel" class="tab-pane score-mtx-pane" id="ndMtx-{{uniqId}}">
+            <div class="well well-sm score-mtx-well score-ndMtx-well" style="margin:10px">
+              <div class="table-responsive">
+                <table class="table table-bordered table-condensed ndMtx">
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      {% for color in convertedPalette %}
+                        <td data-lab-color="{{color}}"></td>
+                      {% end %}
+                    </tr>
+                    {% for color, row in zip(convertedPalette, ndMtx) %}
+                      <tr>
+                        <td data-lab-color="{{color}}"></td>
+                        {% for d in row %}
+                          <td>{{ d }}</td>
+                        {% end %}
+                      </tr>
+                    {% end %}
+                  <tbody>
+                </table>
+              </div>
+            </div>
+          </div><!-- end ND panel -->
+          <div role="tabpanel" class="tab-pane score-mtx-pane" id="ppMtx-{{uniqId}}">
+            <div class="well well-sm score-mtx-well score-ppMtx-well" style="margin:10px">
+              <div class="table-responsive">
+                <table class="table table-bordered table-condensed ppMtx">
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      {% for color in convertedPalette %}
+                        <td data-lab-color="{{color}}"></td>
+                      {% end %}
+                    </tr>
+                    {% for color, row in zip(convertedPalette, ppMtx) %}
+                      <tr>
+                        <td data-lab-color="{{color}}"></td>
+                        {% for d in row %}
+                          <td>{{ d }}</td>
+                        {% end %}
+                      </tr>
+                    {% end %}
+                  <tbody>
+                </table>
+              </div>
+            </div>
+          </div><!-- end PP panel -->
+
+          <div role="tabpanel" class="tab-pane score-mtx-pane" id="nuMtx-{{uniqId}}">
+            <div class="well well-sm score-mtx-well score-nuMtx-well" style="margin:10px">
+              <div class="table-responsive">
+                <table class="table table-bordered table-condensed ppMtx">
+                  <tbody>
+                    <tr>
+                      {% for color in convertedPalette %}
+                        <td data-lab-color="{{color}}"></td>
+                      {% end %}
+                    </tr>
+                    <tr>
+                      {% for d in nuScores %}
+                        <td>{{ d }}</td>
+                      {% end %}
+                    </tr>
+                  <tbody>
+                </table>
+              </div>
+            </div>
+          </div><!-- end NU panel -->
+        </div>
+
+      </div><!-- end tabbed mtx environment -->
+
+    </div><!-- end col-sm-9 -->
+  </div><!-- end row -->
+</div>
