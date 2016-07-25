@@ -1,0 +1,24 @@
+{
+  "name": "colorgorical",
+  "homepage": "https://github.com/connorgr/colorgorical",
+  "authors": [
+    "connorgr <connor@cs.brown.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "topojson": "^1.6.26",
+    "d3": "v3",
+    "font-awesome": "^4.6.3",
+    "bootstrap": "^3.3.7"
+  }
+}
