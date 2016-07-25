@@ -5,30 +5,87 @@
   smaller palettes to make. Results will automatically appear when ready.
 </p>
 
-<p>You can change the appearence of palettes in several ways. The first is by
-  changing how Colorgorical picks colors by dragging the sliders to the left.
-  They control how important two types of discriminability (perceptual distance
-  and color-name difference), color preference (pair preference), and color-name
-  uniqueness should be when selecting colors.</p>
-
-<p>
-  You can restrict which hues to include in your palette by using the <em>select
-  hue filters</em> panel in the menu bar. By clicking on the hue wheel, or by
-  entering an angle interval manually, you can define which hue regions to
-  include in your palette. Lightness of colors can be similarly filtered.
+<p>For greater detail, please consult our
+  <a href="{{ static_url("pdf/colorgorical.pdf") }}">paper</a> or the
+  <a href="http://github.com/connorgr/colorgorical">source code</a>.
 </p>
 
+<hr />
+
+<h4>Score Importance</h4>
+
+<dl>
+  <dt>Perceptual Distance</dt>
+  <dd style="margin: 0 0 10px 0;">
+    Increasing <em>Perceptual Distance</em> favors
+    palette colors that are more easily discriminable to the human eye.
+    To accurately model human color acuity, this is performed using
+    <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">CIEDE2000</a>
+    in <a href="https://en.wikipedia.org/wiki/Lab_color_space">CIE Lab</a>
+    color space.
+  </dd>
+
+  <dt>Name Difference</dt>
+  <dd style="margin: 0 0 10px 0;">
+    Increasing <em>Name Difference</em> favors palette colors that share few
+    common names. This is similar to
+    perceptual distance, but can lead to different results in certain areas of
+    color space. This happens when there are many different names for
+    perceptually close colors (e.g., red and pink are perceptually close but
+    named differently). Colorgorical calculates this using Heer and Stone's
+    <a href="vis.stanford.edu/color-names">Name Difference function</a>, which
+    is built on top of the
+    <a href="https://blog.xkcd.com/2010/05/03/color-survey-results/">XKCD
+      color-name survey</a>.
+  </dd>
+
+  <dt>Pair Preference</dt>
+  <dd style="margin: 0 0 10px 0;">
+    Increasing <em>Pair Preference</em> favors palette colors that are, on
+    average, predicted to be more aesthetically preferable together.
+    Typically these colors are similar in hue, have different lightness, and are
+    cooler colors (blues and greens).
+    Pair Preference is based off of
+    <a href="http://www.ncbi.nlm.nih.gov/pubmed/21264737">Schloss and Palmer's
+    research on color preference</a>.
+  </dd>
+
+  <dt>Name Uniqueness</dt>
+  <dd style="margin: 0 0 10px 0;">
+    Increasing <em>Name Uniqueness</em> favors palette colors that are uniquely
+    named. Some colors like <span style="color:red">red</span> are readily named
+    and are favored, whereas <span style="color:#B8A979">other colors</span> are less
+    obviously named and are ignored. Like, Name Difference, Name Uniqueness is
+    based on Heer and Stone's color-name research.
+  </dd>
+</dl>
+
+<hr />
+
+<h4>Select hue filter</h4>
+
+<p>You can limit which colors are selected by either dragging over the wheel to
+  select a hue range, or by entering the angles manually (e.g., select only
+  reds).
+  You can also make multiple selections
+  after one another to select many different hue ranges (e.g., select both
+  greens and purples).</p>
+
+<h4>Select lightness range</h4>
+
+<p>You can change whether Colorgorical samples lighter or darker colors by
+    dragging the circles on either end of the lightness range marker.</p>
+
+<hr />
+
+<h4>Add starting colors</h4>
+
 <p>
-  You can guarentee that certain colors are in your palette by entering them
+  You can guarantee that certain colors are in your palette by entering them
   through the <em>Add starting palette colors</em> panel in the menu bar. Make
   sure that you enter colors one at a time, without quotes, and in either HEX
   or RGB format. Alternatively, if you generate a palette and want to add a
   color in it to future generations, click the
   <span class="btn btn-xs btn-default addToStart"><i class="fa fa-plus"></i>
   start</span> button.
-</p>
-
-<p>
-  For more information,
-  please consult our <a href="#">paper</a> or the <a href="#">documentation</a>.
 </p>

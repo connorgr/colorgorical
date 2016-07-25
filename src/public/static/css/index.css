@@ -66,6 +66,27 @@
   padding: 5px;
 }
 
+.questionTooltip {
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  /*width: 14px;*/
+  height:14px;
+  font-size: 11px;
+  position: relative;
+}
+.questionTooltip:after {
+  color: rgb(51,51,51);
+  content: '?';
+  cursor: pointer;
+  font-style: normal;
+  font-weight: bold;
+  position: absolute;
+  left: 4.5px;
+  top: 0.5px;
+}
+
 .queryNumColors input {
   margin: 5px auto 5px auto;
   text-align: center;

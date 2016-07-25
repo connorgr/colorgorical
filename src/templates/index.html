@@ -29,20 +29,20 @@
       <div>
         <ul id="sliderSettings" class="list-unstyled">
           <li>
-            <h2>Perceptual distance: <span id="deRI"></span>%</h2>
+            <h2>Perceptual Distance <i class="tooltip" title="help!" id="deHelp">HAAAA</i></h2>
             <input id="modelWpd" type="range" min=0 max=100 value=0 />
           </li>
           <li>
-            <h2>Name distance: <span id="ndRI"></span>%</h2>
+            <h2>Name Difference</h2>
             <input id="modelWnd" type="range" min=0 max=100 value=0 />
           </li>
           <li>
-            <h2>Name uniqueness: <span id="nuRI"></span>%</h2>
-            <input id="modelWnu" type="range" min=0 max=100 value=0 />
+            <h2>Pair Preference</h2>
+            <input id="modelWpp" type="range" min=0 max=100 value=100 />
           </li>
           <li>
-            <h2>Pair preference: <span id="ppRI"></span>%</h2>
-            <input id="modelWpp" type="range" min=0 max=100 value=100 />
+            <h2>Name Uniqueness</h2>
+            <input id="modelWnu" type="range" min=0 max=100 value=0 />
           </li>
         </ul>
       </div>
@@ -189,5 +189,4 @@ ghostMapData.unemployment.forEach(function(d) {
 <script src="{{ static_url("js/palettePreviewViz.js") }}"></script>
 
 
-<!-- <script src="js/draw.js"></script> -->
 {% end %}
