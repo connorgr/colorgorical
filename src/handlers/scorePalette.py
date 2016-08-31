@@ -125,7 +125,6 @@ class ScorePaletteHandler(web.RequestHandler):
             body = dict()
         else:
             body = json.loads(self.request.body)
-        print body.keys()
 
         if 'getComparison' not in body:
             originalPalette = body["palette"]
@@ -133,7 +132,6 @@ class ScorePaletteHandler(web.RequestHandler):
 
             scores=self.model.scorePalette(palette,weights={"ciede2000":1,"nameDifference":1,\
                     "nameUniqueness":1, "pairPreference":1})
-            print '+',scores["minScores"]
 
             deMtx = np.ones((len(palette), len(palette)))*-200
             ndMtx = np.ones((len(palette), len(palette)))*-200
@@ -156,8 +154,6 @@ class ScorePaletteHandler(web.RequestHandler):
             else:
                 name = "???"
 
-            print '+',scores["minScores"]
-
             returnObj = dict(
                 originalPalette=originalPalette,
                 convertedPalette=palette,
@@ -179,8 +175,7 @@ class ScorePaletteHandler(web.RequestHandler):
             returnObj["paletteScores"] = self.paletteScores
             returnObj["orderedPaletteScores"] = self.orderedPaletteScores
             returnObj["orderedAveragePaletteScores"] = self.orderedAveragePaletteScores
-            print returnObj.keys()
-            print self.palettes
+
             html = self.render_string("snippet/scoreSummary.html", **returnObj)
             returnObj["html"] = html
             self.write(json.dumps(returnObj))
