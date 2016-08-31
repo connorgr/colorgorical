@@ -131,7 +131,9 @@ class ScorePaletteHandler(web.RequestHandler):
             originalPalette = body["palette"]
             palette = seeds = [ [int(5 * round(float(i)/5)) for i in c] for c in body["palette"]]
 
-            scores=self.model.scorePalette(palette)
+            scores=self.model.scorePalette(palette,weights={"ciede2000":1,"nameDifference":1,\
+                    "nameUniqueness":1, "pairPreference":1})
+            print '+',scores["minScores"]
 
             deMtx = np.ones((len(palette), len(palette)))*-200
             ndMtx = np.ones((len(palette), len(palette)))*-200
@@ -153,6 +155,8 @@ class ScorePaletteHandler(web.RequestHandler):
                 name = body["name"]
             else:
                 name = "???"
+
+            print '+',scores["minScores"]
 
             returnObj = dict(
                 originalPalette=originalPalette,

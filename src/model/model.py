@@ -446,8 +446,11 @@ class Model():
         scores = npc.score(labPairs)
         de = np.min(scores[:,0]) * weights["ciede2000"]
         nd = np.min(scores[:,1]) * weights["nameDifference"]
-        pp = np.min(scores[:,2]) * weights["nameUniqueness"]
-        nu = np.min(scores[:,[3,4]]) * weights["pairPreference"]
+        pp = np.min(scores[:,2]) * weights["pairPreference"]
+        nu = np.min(scores[:,[3,4]]) * weights["nameUniqueness"]
+        print scores[:,2]
+        print np.min(scores[:,2])
+        print ''
 
         nuPair = np.hstack((palette.reshape((-1,3)), palette.reshape((-1,3))))
         nuScores = npc.score(nuPair)[:,3]
