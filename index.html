@@ -1,0 +1,70 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+<meta charset="utf-8">
+<title>Colorgorical</title>
+
+<style>
+  body {
+    background: #eee;
+    padding: 25px;
+  }
+  * {
+    color: #333;
+    font-family: "Helvetica Neue", Helvetica,Arial,sans-serif;
+  }
+  h1 {
+    color: #337ab7;
+    font-size: 28px;
+    font-size: 8vw;
+    margin-bottom: 10px;
+    padding-bottom: 0px;
+  }
+  p {
+    font-size: 22px;
+  }
+  .banner {
+    background-image: url('src/public/static/img/bannerMapSlice.svg');
+    height: 20px;
+    width: 100%;
+  }
+  @media (max-width: 599px) {
+    body {
+      padding: 0;
+    }
+  }
+  @media (min-width: 600px){
+    h1, p, .content {
+      max-width: 600px;
+    }
+  }
+  @media (min-width: 1000px){
+    h1 {
+      font-size: 80px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <h1>Colorgorical</h1>
+
+  <div class="content">
+    <div class="banner"></div>
+    <p>Colorgorical is an open-sourced tool to create information visualization
+      categorical color palettes. Unlike other tools built for general design,
+      Colorgorical assures that all colors surpass a minimum level of
+      discriminability to encourage the creation of legible visualization.</p>
+
+    <p>You can try out Colorgorical at
+      <a href="http://vrl.cs.brown.edu/color">here</a>,
+      and it is open sourced
+      <a href="https://github.com/connorgr/colorgorical">here</a>.
+    </p>
+
+    <p>The tool was written by <a href="http://gramaz.io">Connor Gramazio</a>
+      with advisement from David Laidlaw and Karen Schloss.</p>
+  </div>
+
+</body>
+</html>
